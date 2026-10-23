@@ -121,7 +121,7 @@ APK / .exe ──https──► Render (FastAPI) ──► Supabase (PostgreSQL)
    `render.yaml` из корня. При создании спросит `DATABASE_URL` (строка из п. 1) и `ADMIN_PASSWORD`
    (пароль админа в облаке; `moder` и `demo` получат пароли из «Тестовых аккаунтов»).
 3. Таблицы, роли, места памяти и тестовые страницы создаются сами при старте сервера.
-4. Проверка: `https://<адрес от Render>/docs`. Если адрес не `https://necropolis.onrender.com` —
+4. Проверка: `https://<адрес от Render>/docs`. Сейчас это `https://necropolis-4nfl.onrender.com`. Если адрес сменится —
    поменять `CLOUD_URL` в `client/config.py` и пересобрать .exe и .apk.
 
 Свой компьютер вместо облака: «Сменить адрес сервера» на экране входа → `http://127.0.0.1:8000`

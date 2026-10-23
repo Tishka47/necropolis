@@ -5,5 +5,5 @@
 Можно переопределить переменной окружения NECROPOLIS_API_URL."""
 import os
 
-CLOUD_URL = "https://necropolis.onrender.com"   # если Render выдал другой адрес — поменять здесь
+CLOUD_URL = "https://necropolis-4nfl.onrender.com"   # если Render выдал другой адрес — поменять здесь
 API_URL = os.getenv("NECROPOLIS_API_URL", CLOUD_URL)
