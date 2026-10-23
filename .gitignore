@@ -1,0 +1,17 @@
+# окружения и кэш
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# секреты, локальная БД и логи
+.env
+*.db
+necropolis.log
+
+# сборки (готовые файлы раздаём отдельно, в репозиторий не кладём)
+Necropolis.exe
+Necropolis.apk
+.build-temp/
+client/.buildozer/
+client/bin/

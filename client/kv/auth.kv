@@ -1,0 +1,108 @@
+#:import T theme
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [dp(28), dp(24)]
+        spacing: dp(12)
+        Widget:
+        MutedLabel:
+            text: 'КНИГА ПАМЯТИ'
+            halign: 'center'
+            font_size: sp(12)
+            bold: True
+        TitleLabel:
+            text: 'Цифровой некрополь'
+            halign: 'center'
+            font_size: sp(34)
+        Widget:
+            size_hint_y: None
+            height: dp(14)
+            canvas:
+                Color:
+                    rgba: T.P.TEXT
+                Line:
+                    points: self.center_x - dp(28), self.center_y, self.center_x + dp(28), self.center_y
+                    width: 1
+        AppLabel:
+            text: '[i]Память о людях, которая не потеряется[/i]'
+            font_name: T.SERIF
+            color: T.P.MUTED
+            font_size: sp(16)
+            halign: 'center'
+        Widget:
+            size_hint_y: None
+            height: dp(20)
+        AppInput:
+            id: login
+            hint_text: 'Логин или email'
+        AppInput:
+            id: password
+            hint_text: 'Пароль'
+            password: True
+            on_text_validate: root.do_login()
+        Widget:
+            size_hint_y: None
+            height: dp(6)
+        AppButton:
+            text: 'Входим...' if root.busy else 'Войти'
+            disabled: root.busy
+            on_release: root.do_login()
+        SecondaryButton:
+            text: 'Регистрация'
+            on_release: app.goto('register')
+        LinkButton:
+            text: 'Продолжить без входа'
+            on_release: app.enter_as_guest()
+        Widget:
+        MutedLabel:
+            text: app.server_info
+            halign: 'center'
+            font_size: sp(12)
+        LinkButton:
+            text: 'Сменить адрес сервера'
+            font_size: sp(12)
+            height: dp(30)
+            on_release: app.ask_server_url()
+
+<RegisterScreen>:
+    back_target: 'login'
+    BoxLayout:
+        orientation: 'vertical'
+        TopBar:
+            title: 'Регистрация'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [dp(24), dp(20)]
+                spacing: dp(12)
+                AppLabel:
+                    text: '[i]Аккаунт нужен, чтобы создавать страницы памяти и делиться воспоминаниями.[/i]'
+                    font_name: T.SERIF
+                    color: T.P.MUTED
+                    font_size: sp(15)
+                AppInput:
+                    id: username
+                    hint_text: 'Логин (латиница, цифры, _ . -)'
+                AppInput:
+                    id: email
+                    hint_text: 'Email'
+                AppInput:
+                    id: password
+                    hint_text: 'Пароль (не короче 6 символов)'
+                    password: True
+                AppInput:
+                    id: password2
+                    hint_text: 'Повторите пароль'
+                    password: True
+                    on_text_validate: root.do_register()
+                Widget:
+                    size_hint_y: None
+                    height: dp(6)
+                AppButton:
+                    text: 'Создаём...' if root.busy else 'Зарегистрироваться'
+                    disabled: root.busy
+                    on_release: root.do_register()

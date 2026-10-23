@@ -1,0 +1,105 @@
+#:import T theme
+
+<MemorialItem>:
+    orientation: 'vertical'
+    padding: [dp(4), dp(12), dp(4), dp(10)]
+    spacing: dp(2)
+    canvas.before:
+        Color:
+            rgba: T.P.SURFACE if self.state == 'down' else (0, 0, 0, 0)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: T.P.RULE
+        Line:
+            points: self.x, self.y, self.right, self.y
+            width: 1
+    Label:
+        text: root.title
+        font_name: T.SERIF
+        color: T.P.TEXT
+        font_size: sp(18)
+        text_size: self.size
+        halign: 'left'
+        valign: 'bottom'
+        shorten: True
+        shorten_from: 'right'
+    BoxLayout:
+        Label:
+            text: root.subtitle
+            color: T.P.MUTED
+            font_size: sp(13)
+            text_size: self.size
+            halign: 'left'
+            valign: 'top'
+            shorten: True
+            shorten_from: 'right'
+        Label:
+            text: root.status_text
+            color: {'approved': T.P.SUCCESS, 'pending': T.P.PENDING, 'rejected': T.P.DANGER}.get(root.status, T.P.MUTED)
+            font_size: sp(11)
+            bold: True
+            size_hint_x: None
+            width: dp(110)
+            text_size: self.size
+            halign: 'right'
+            valign: 'top'
+
+<ListScreen>:
+    back_target: 'main'
+    BoxLayout:
+        orientation: 'vertical'
+        TopBar:
+            title: root.screen_title
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [dp(16), dp(10), dp(16), dp(6)]
+            spacing: dp(8)
+            BoxLayout:
+                size_hint_y: None
+                height: dp(46)
+                spacing: dp(10)
+                AppInput:
+                    id: search
+                    hint_text: 'Поиск по ФИО'
+                    on_text_validate: root.load()
+                AppButton:
+                    text: 'Найти'
+                    size_hint_x: None
+                    width: dp(84)
+                    height: dp(42)
+                    pos_hint: {'center_y': 0.5}
+                    on_release: root.load()
+            BoxLayout:
+                size_hint_y: None
+                height: dp(46)
+                spacing: dp(10)
+                AppSpinner:
+                    id: status_filter
+                    text: 'Все статусы'
+                    values: root.filter_values
+                    on_text: root.on_filter_changed()
+                SecondaryButton:
+                    text: 'Сброс'
+                    size_hint_x: None
+                    width: dp(84)
+                    height: dp(42)
+                    pos_hint: {'center_y': 0.5}
+                    on_release: root.reset_filters()
+            MutedLabel:
+                text: root.info_text
+                halign: 'left'
+        RecycleView:
+            id: rv
+            viewclass: 'MemorialItem'
+            do_scroll_x: False
+            RecycleBoxLayout:
+                default_size: None, dp(74)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                padding: [dp(16), 0, dp(16), dp(12)]

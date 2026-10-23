@@ -1,0 +1,17 @@
+#:import T theme
+
+<DetailScreen>:
+    back_target: 'list'
+    BoxLayout:
+        orientation: 'vertical'
+        TopBar:
+            title: root.screen_title
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                id: content
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [dp(20), dp(16), dp(20), dp(24)]
+                spacing: dp(10)

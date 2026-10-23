@@ -1,0 +1,44 @@
+#:import T theme
+
+<ProfileScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        TopBar:
+            title: 'Профиль'
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [dp(20), dp(20)]
+                spacing: dp(10)
+                TitleLabel:
+                    id: name_label
+                MutedLabel:
+                    id: info_label
+                SectionLabel:
+                    text: 'Данные аккаунта'
+                AppInput:
+                    id: email
+                    hint_text: 'Email'
+                AppInput:
+                    id: current_password
+                    hint_text: 'Текущий пароль (нужен для смены пароля)'
+                    password: True
+                AppInput:
+                    id: new_password
+                    hint_text: 'Новый пароль'
+                    password: True
+                Widget:
+                    size_hint_y: None
+                    height: dp(6)
+                AppButton:
+                    text: 'Сохранить изменения'
+                    on_release: root.save_profile()
+                Widget:
+                    size_hint_y: None
+                    height: dp(16)
+                DangerButton:
+                    text: 'Выйти из аккаунта'
+                    on_release: app.logout()

@@ -1,0 +1,22 @@
+# Деплой на Render (Blueprint): New → Blueprint → выбрать этот репозиторий.
+# Бэк лежит в папке backend; БД — Supabase (Session pooler), её строку вводим при создании.
+services:
+  - type: web
+    name: necropolis
+    runtime: python
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    # --proxy-headers: за прокси Render брать настоящий IP клиента (нужно для блокировки перебора паролей)
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips "*"
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.10
+      - key: DATABASE_URL
+        sync: false  # строка Supabase (Connect → Session pooler), вводится при создании
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        sync: false  # пароль админа в облаке — придумать свой при создании

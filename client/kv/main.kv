@@ -1,0 +1,40 @@
+#:import T theme
+
+<MainScreen>:
+    back_target: 'main'
+    BoxLayout:
+        orientation: 'vertical'
+        TopBar:
+            title: 'Цифровой некрополь'
+            show_back: False
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: [dp(20), dp(24), dp(20), dp(20)]
+                spacing: dp(6)
+                TitleLabel:
+                    id: greeting
+                MutedLabel:
+                    id: role_label
+                AppLabel:
+                    text: '[i]Здесь хранятся истории людей, которых мы помним: даты, биографии, фотографии и воспоминания близких.[/i]'
+                    font_name: T.SERIF
+                    color: T.P.MUTED
+                    font_size: sp(15)
+                Widget:
+                    size_hint_y: None
+                    height: dp(18)
+                BoxLayout:
+                    id: menu
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: T.P.TEXT
+                        Line:
+                            points: self.x, self.top, self.right, self.top
+                            width: 1
